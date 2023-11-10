@@ -162,8 +162,9 @@ cython_debug/
 # vscode
 .vscode
 
+# Uncomment this if you what to delete csv files from GitHub. This need to start Git workflow.
 # csv
-*.csv
+# *.csv
 
 # migrations
 **/migrations/
@@ -173,3 +174,6 @@ cython_debug/
 
 # images
 *.png
+
+# Migrations
+migrations/
