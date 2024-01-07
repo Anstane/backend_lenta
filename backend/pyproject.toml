@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "backend"
+name = "backend_lenta"
 version = "0.1.0"
 description = "Lenta Backend App"
 authors = [
