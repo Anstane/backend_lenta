@@ -13,6 +13,11 @@ services:
       - 5432:5432
     volumes:
       - lenta_pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: pg_isready -U postgres
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   backend:
     image: anstane/lenta_backend
@@ -22,7 +27,19 @@ services:
       - lenta_static:/backend_static
     command: /app/start_backend.sh
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: curl --fail http://localhost:8000/api/v1/
+      interval: 30s
+      timeout: 5s
+      retries: 5
+
+  ds-script:
+    image: anstane/ml_lenta
+    depends_on:
+      backend:
+        condition: service_healthy
 
   gateway:
     image: nginx:1.22.1
@@ -33,9 +50,4 @@ services:
       - lenta_static:/staticfiles/
     ports:
       - 8000:80
-
-  ds-script:
-    image: anstane/ml_lenta
-    depends_on:
-      - backend
-      - db
+      

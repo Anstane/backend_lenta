@@ -3,7 +3,8 @@ FROM python:3.11-slim
 WORKDIR /app
 
 RUN apt-get update && \
-    apt-get install -y dos2unix
+    apt-get install -y dos2unix && \
+    apt-get install -y curl
 
 RUN pip install poetry==1.6.1
 
