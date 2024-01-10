@@ -15,8 +15,8 @@ services:
       - lenta_pg_data:/var/lib/postgresql/data
     healthcheck:
       test: pg_isready -U postgres
-      interval: 10s
-      timeout: 5s
+      interval: 7s
+      timeout: 3s
       retries: 5
 
   backend:
@@ -50,4 +50,3 @@ services:
       - lenta_static:/staticfiles/
     ports:
       - 8000:80
-      
